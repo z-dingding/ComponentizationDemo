@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.hxzk.bj.x5webview">
+
+    <application
+        android:name=".X5Application"
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        tools:replace="android:name"
+      >
+        <activity android:name=".X5MainActivity"/>
+    </application>
+
+</manifest>

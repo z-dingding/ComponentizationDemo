@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.zjt.componentization"
+        minSdkVersion rootProject.ext.globalMinSdkVersion
+        targetSdkVersion rootProject.ext.globalCompileSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //对于多个 Bussines Module 中资源名冲突的问题，可以通过在 build.gradle 定义前缀的方式解决：
+        //resourcePrefix "app_"
+
+        //添加了javaCompileOptions,现在必须显式声明注释处理器
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+        /* ARouter的配置*/
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(path: ':commonlib')
+    annotationProcessor androidDependencies.butterknife_apt
+
+    if (isNeedX5Component.toBoolean()) {
+        implementation project(path: ':x5webview')
+    }
+    if (isNeedHomeModule.toBoolean()) {
+        implementation project(path: ':module_home')
+    }
+    if (isNeedZiXunModule.toBoolean()) {
+        implementation project(path: ':module_zixun')
+    }
+    if (isNeedUserModule.toBoolean()) {
+        implementation project(path: ':module_user')
+    }
+
+}

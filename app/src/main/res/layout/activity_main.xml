@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="ResourceName">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@id/bav_main"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <!--
+    底部导航栏高度默认是 56dp。
+    菜单元素只能是 1~5 个。如果个数多于5个，则会报错，建议3-5个最佳
+    icon 的选中颜色默认是 @color/colorPrimary。当然你也可以使用 app:itemIconTint=””
+    菜单元素文字的默认颜色是 @color/colorPrimary。你可以使用 app:itemTextColor=””
+    底部导航栏背景颜色默认是当前样式的背景色，你可以使用 app:itemBackground=””-->
+
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bav_main"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:itemTextColor="@drawable/bottom_navigation_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu"/>
+
+
+</android.support.constraint.ConstraintLayout>

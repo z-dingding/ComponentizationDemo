@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 控制app状态栏栏背景色  -->
+    <attr name="custom_attr_app_statusbar_bg" format="color|reference" />
+    <!-- 返回图标自定义属性-->
+    <attr name="custom_attr_app_back" format="reference" />
+    <!-- 更多自定义属性-->
+    <attr name="custom_attr_app_more" format="reference" />
+</resources>

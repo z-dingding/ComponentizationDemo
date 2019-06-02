@@ -1,0 +1,78 @@
+if(isNeedX5Component.toBoolean()){
+    apply plugin: 'com.android.library'
+}else{
+    apply plugin: 'com.android.application'
+}
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.globalCompileSdkVersion
+
+
+    sourceSets {
+        main {
+            if (!isNeedX5Component.toBoolean()) {
+                //组件模式下Manifest,组件的Applicaion必须继承自BaseApplicaion
+                manifest.srcFile 'src/main/runalone/AndroidManifest.xml'
+
+            } else {
+                //集成模式下Manifest
+                manifest.srcFile '/src/main/AndroidManifest.xml'
+                java {
+                    //排除java/debug文件夹下的所有文件
+                    exclude '*module'
+                }
+            }
+        }
+    }
+
+    defaultConfig {
+        if(!isNeedX5Component.toBoolean()){
+            applicationId "com.hxzk.bj.x5webview"
+        }
+
+        minSdkVersion rootProject.ext.globalMinSdkVersion
+        targetSdkVersion rootProject.ext.globalTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//对于多个 Bussines Module 中资源名冲突的问题，可以通过在 build.gradle 定义前缀的方式解决：
+        resourcePrefix "x5module_"
+        //对于多个 Bussines Module 中资源名冲突的问题，可以通过在 build.gradle 定义前缀的方式解决：
+        resourcePrefix "x5webview_"
+
+        //添加了javaCompileOptions,现在必须显式声明注释处理器
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+
+        /* ARouter的配置*/
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    annotationProcessor androidDependencies.butterknife_apt
+    //X5Lib的依赖
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1371_43624_sharewithdownload_withoutGame_obfs_20181106_121046.jar')
+    implementation project(path: ':commonlib')
+
+}

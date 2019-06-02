@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ComponentizationDemo</string>
+
+    <string name="app_tab_one">首页</string>
+    <string name="app_tab_two">资讯</string>
+    <string name="app_tab_three">我的</string>
+</resources>
